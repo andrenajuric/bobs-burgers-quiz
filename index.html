@@ -1,30 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Quiz</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans" />
+    <title>Bob's Burgers Trivia!</title>
 </head>
-<body>
 
-<div class = "question-1">
-    <h1>What does HTML stand for?</h1>
-    <div class = "options-1">
-        <dt>Home Tool Markup Language</dt>
-        <dt>Handy Tool Me Likey</dt>
-        <dt>Hyperlinks and Text Markup Language</dt>
-        <dt>Hyper Text Markup Language</dt>
+<body>
+    <header>
+        <p id="highscores"><a href="#">View Highscores</a></p>
+        <p id="timer">Time: 75</p>
+    </header>
+    <div id="container">
+        <div id="title">
+            <h1>Bob's Burgers Trivia</h1>
+        </div>
+        <br>
+        <div id="quiz"></div>
+        <div id="question"></div>
+        <div id="choices">
+            <div class="button" id="choice1"></div>
+            <div class="button" id="choice2"></div>
+            <div class="button" id="choice3"></div>
+            <div class="button" id="choice4"></div>
+        </div>
+        <div class="button" id="start"> <a href="#">Let's Begin!</a></div>
+        <div class="button" id="play-again"> <a href="#">Try Again!</a></div>
     </div>
-</div>
-<div class = "question-2">
-    <h1>What does CSS stand for?</h1>
-    <div class = "options-2">
-        <dt>Cascading Style Sheets</dt>
-        <dt>Central Style Sheet</dt>
-        <dt>Constructed Style Source</dt>
-        <dt>Cascaded Styling Sheet</dt>
-    </div>
-</div>
-    
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+    <script src="./assets/js/quiz.js"></script>
 </body>
+
 </html>
+
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+
+<!-- <head> -->
+<!-- <title>Dynamic Quiz Project</title> -->
+<!-- <link type='text/css' rel='stylesheet' href='stylesheet.css' /> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans" /> -->
+<!-- </head> -->
+
+<!-- <body> -->
+<!-- <div id='container'> -->
+<!-- <div id='title'> -->
+<!-- <h1>Learning Js Properly: Project #1 - Dynamic Quiz</h1> -->
+<!-- </div> -->
+<!-- <br /> -->
+<!-- <div id='quiz'></div> -->
+<!-- <div class='button' id='next'><a href='#'>Next</a></div> -->
+<!-- <div class='button' id='prev'><a href='#'>Prev</a></div> -->
+<!-- <div class='button' id='start'> <a href='#'>Start Over</a></div> -->
+<!-- <button class='' id='next'>Next</a></button>
+    		<button class='' id='prev'>Prev</a></button>
+    		<button class='' id='start'> Start Over</a></button> -->
+</div>
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+<script type="text/javascript" src='questions.json'></script>
+<script type='text/javascript' src='jsquiz.js'></script>
+</body>
+<!-- </html>  -->
