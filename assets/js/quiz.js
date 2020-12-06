@@ -1,202 +1,136 @@
-// Select elements & declaring them as variables 
-var quiz = $('#quiz');
-var playAgain = $('#play-again');
+// select HTML elements and declare as variables
+var main = document.getElementsByTagName("main")[0];
+var timer = document.getElementById("#time-shown");
+var startButton = document.getElementById("#start");
+var questionNum = document.getElementById("#question-number");
+var question = document.getElementById("#question");
+var choices = document.getElementById("#choices");
+var questionResult = document.getElementById("#result");
+var backToStart = documnet.getElementById("#back-to-start");
 
-// Global variables
-var questionCounter = 0;     // keeps track of question #
-var selections = [];         // empty array to handle user selections
-var correctScore = 0;        // counts correct answers
-var incorrectScore = 0;      // counts incorrect answers
-var pointer = 0;             // used to move through array of objects
-
-var triviaQuestions = [{
-    question: "What is the order of the Belcher children from oldest to youngest?",
-    choice1: "Tina, Louise, Gene",
-    choice2: "Gene, Tina, Louise",
-    choice3: "Louise, Gene, Tina",
-    choice4: "Tina, Gene, Louise",
-    correct: "Tina, Gene, Louise"
-}, {
-    question: "When is Bob and Linda's anniversary?",
-    choices: ["February 14th", "May 7th", "June 1st", "September 3rd"],
-    correct: "September 3rd"
-}, {
-    question: "Millie is Louise's #1 fan. What costume duo did she want to be with Louise on Halloween?",
-    choices: ["Dust bunnies", "Batman and Robin", "Bert and Ernie", "Buzz and Woody"],
-    correct: "Dust bunnies"
-}];
-
-$('#start').on('click', startQuiz);
-
-function startQuiz() {
-    start.style.display = "none";
-    quiz.style.display = "block";
-}
-
-/* (function () {
-    var questions = [{
-        question: "What is 2*5?",
-        choices: [2, 5, 10, 15, 20],
-        correctAnswer: 2
+// trivia questions
+var triviaQuestions = [ // creates array that holds questions and choices
+    {
+        "question": "What is the order of the Belcher children from oldest to youngest?",
+        "choices": ["Tina, Louise, Gene", "Gene, Tina, Louise",
+            "Louise, Gene, Tina", "Tina, Gene, Louise",
+            "Tina, Gene, Louise"],
+        "correct": 3
     }, {
-        question: "What is 3*6?",
-        choices: [3, 6, 9, 12, 18],
-        correctAnswer: 4
+        "question": "When is Bob and Linda's anniversary?",
+        "choices": ["February 14th", "May 7th", "June 1st", "September 3rd"],
+        "correct": 3
     }, {
-        question: "What is 8*9?",
-        choices: [72, 99, 108, 134, 156],
-        correctAnswer: 0
+        "question": "Millie is Louise's #1 fan. What costume duo did she want to be with Louise on Halloween?",
+        "choices": ["Dust bunnies", "Batman and Robin", "Bert and Ernie", "Buzz and Woody"],
+        "correct": 0
     }, {
-        question: "What is 1*7?",
-        choices: [4, 5, 6, 7, 8],
-        correctAnswer: 3
+        "question": "Who are Bob's 2 main regulars at the restaurant?",
+        "choices": ["Jimmy Pesto and Trev", "Teddy and Marshmallow", "Gretchen and Mike the Mailman", "Andy and Ollie"],
+        "correct": 0
     }, {
-        question: "What is 8*8?",
-        choices: [20, 30, 40, 50, 64],
-        correctAnswer: 4
+        "question": "What is the name of Bob and Linda's landlord?",
+        "choices": ["Mr. Frond", "Mr. Fischoeder", "Sergeant Bosco", "Dr. Yap"],
+        "correct": 1
+    }, {
+        "question": "Who lost the snoring contest between Bob and Linda?",
+        "choices": ["Bob", "Linda", "Both", "Neither - the kids won!"],
+        "correct": 2
+    }, {
+        "question": "Linda was going to open an Etsy shop and name it...",
+        "choices": ["The Knitcracker", "Scarving Children", "Sew, Sew Knitting", "Subpar Scarves for Children"],
+        "correct": 1
+    }, {
+        "question": "In Season 9, Rudy's Halloween costume was:",
+        "choices": ["Jason Segel from I Love You, Man", "A hockey goalie with a mask", "Nun of your business", "Paul Rudd from I Love You, Man"],
+        "correct": 3
+    }, {
+        "question": "Which Boyz4Now member did Louise fall in love with?",
+        "choices": ["Griffin", "Matt", "Allen", "Boo Boo"],
+        "correct": 3
     }];
 
-    var questionCounter = 0; //Tracks question number
-    var selections = []; //Array containing user choices
-    var quiz = $('#quiz'); //Quiz div object
+// creates variables that tracks score
+var startTime = triviaQuestions.lenth * 8;
+var lostTime = 10;
+var timeLeft;
+var scoreCount;
 
-    // Display initial question
-    displayNext();
-
-    // Click handler for the 'next' button
-    $('#next').on('click', function (e) {
-        e.preventDefault();
-
-        // Suspend click listener during fade animation
-        if (quiz.is(':animated')) {
-            return false;
-        }
-        choose();
-
-        // If no user selection, progress is stopped
-        if (isNaN(selections[questionCounter])) {
-            alert('Please make a selection!');
-        } else {
-            questionCounter++;
-            displayNext();
-        }
-    });
-
-    // Click handler for the 'prev' button
-    $('#prev').on('click', function (e) {
-        e.preventDefault();
-
-        if (quiz.is(':animated')) {
-            return false;
-        }
-        choose();
-        questionCounter--;
-        displayNext();
-    });
-
-    // Click handler for the 'Start Over' button
-    $('#start').on('click', function (e) {
-        e.preventDefault();
-
-        if (quiz.is(':animated')) {
-            return false;
-        }
-        questionCounter = 0;
-        selections = [];
-        displayNext();
-        $('#start').hide();
-    });
-
-    // Animates buttons on hover
-    $('.button').on('mouseenter', function () {
-        $(this).addClass('active');
-    });
-    $('.button').on('mouseleave', function () {
-        $(this).removeClass('active');
-    });
-
-    // Creates and returns the div that contains the questions and
-    // the answer selections
-    function createQuestionElement(index) {
-        var qElement = $('<div>', {
-            id: 'question'
-        });
-
-        var header = $('<h2>Question ' + (index + 1) + ':</h2>');
-        qElement.append(header);
-
-        var question = $('<p>').append(questions[index].question);
-        qElement.append(question);
-
-        var radioButtons = createRadios(index);
-        qElement.append(radioButtons);
-
-        return qElement;
-    }
-
-    // Creates a list of the answer choices as radio inputs
-    function createRadios(index) {
-        var radioList = $('<ul>');
-        var item;
-        var input = '';
-        for (var i = 0; i < questions[index].choices.length; i++) {
-            item = $('<li>');
-            input = '<input type="radio" name="answer" value=' + i + ' />';
-            input += questions[index].choices[i];
-            item.append(input);
-            radioList.append(item);
-        }
-        return radioList;
-    }
-
-    // Reads the user selection and pushes the value to an array
-    function choose() {
-        selections[questionCounter] = +$('input[name="answer"]:checked').val();
-    }
-
-    // Displays next requested element
-    function displayNext() {
-        quiz.fadeOut(function () {
-            $('#question').remove();
-
-            if (questionCounter < questions.length) {
-                var nextQuestion = createQuestionElement(questionCounter);
-                quiz.append(nextQuestion).fadeIn();
-                if (!(isNaN(selections[questionCounter]))) {
-                    $('input[value=' + selections[questionCounter] + ']').prop('checked', true);
-                }
-
-                // Controls display of 'prev' button
-                if (questionCounter === 1) {
-                    $('#prev').show();
-                } else if (questionCounter === 0) {
-
-                    $('#prev').hide();
-                    $('#next').show();
-                }
+function init() {
+    startButton.addEventListener("click", event => {
+        event.preventDefault()
+        displayQuestionPage()
+    })
+    choices.addEventListener("click", function (event) {
+        event.preventDefault()
+        if (event.target.matches("button")) {
+            var button = event.target
+            if (button.classList.contains("correct")) {
+                questionResult.textContent = "That's Right!"
+                questionNum.children[nextQuestionIndex - 1].classList.add("correct")
+                scoreCount++
             } else {
-                var scoreElem = displayScore();
-                quiz.append(scoreElem).fadeIn();
-                $('#next').hide();
-                $('#prev').hide();
-                $('#start').show();
+                questionResult.textContent = "*Tina Groan* ...No"
+                questionNum.children[nextQuestionIndex - 1].classList.add('wrong')
+                timeLeft -= lostTime
             }
-        });
-    }
-
-    // Computes score and returns a paragraph element to be displayed
-    function displayScore() {
-        var score = $('<p>', { id: 'question' });
-
-        var numCorrect = 0;
-        for (var i = 0; i < selections.length; i++) {
-            if (selections[i] === questions[i].correctAnswer) {
-                numCorrect++;
-            }
+            if (timeLeft > 0) displayNextQuestion()
+            else displayGetNamePage()
         }
+    })
+    backToStart.addEventListener("click", event => {
+        event.preventDefault()
+        displayStartPage()
+    })
 
-        score.append('You got ' + numCorrect + ' questions out of ' +
-            questions.length + ' right!!!');
-        return score;
+    // display the starting page
+    displayStartingPage()
+}
+
+function displayPage(id) {
+    main.querySelectorAll(".page").forEach(page => {
+        if (page.id == id) {
+            page.classList.remove("hidden")
+        } else {
+            page.classList.add("hidden")
+        }
+    })
+    return 4
+}
+
+function displayStartingPage() {
+    displayPage("start-page")
+
+    clearInterval(timer)
+    timeLeft = 0
+    timer.textContent = formatSeconds(timeLeft)
+}
+
+var nextQuestionIndex;
+
+function displayQuestionPage() {
+    displayPage("question-page")
+
+    questionNum.innterHTML = ""
+
+    for (var i = 0; i < triviaQuestions.length; i++) {
+        var element = triviaQuestions[i];
+        var el = document.createElement("span")
+        el.textContent = i + 1
+        questionNum.appendChild(el)
     }
-})();  */
+
+    nextQuestionIndex = 0
+    scoreCount = 0
+
+    startCountdown()
+
+    displayNextQuestion()
+}
+
+function displayNextQuestion() {
+    if (nextQuestionIndex < triviaQuestions.length) {
+        var question = [nextQuestionIndex].triviaQuestions
+        var result = [nextQuestionIndex].result
+    }
+}
