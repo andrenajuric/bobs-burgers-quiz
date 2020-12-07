@@ -4,38 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans" />
-    <title>Bob's Burgers Trivia!</title>
+    <title>Bob's Burgers Trivia</title>
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
     <header>
-        <a id="view-highscores" a href="#">View Highscores</a>
-        <span id="time">
-            "Time: "
-            <span id="time-shown"> 0:00</span>
-        </span>
+        <a href="#">View Highscores</a>
+        <span id="time">Time: </span>
+        <div id="hero">
+            <img src="./assets/images/the-belchers.png" width="200px" height="270px">
+        </div>
     </header>
-    <main>
-        <section id="start-page">
-            <h1>Bob's Burgers Trivia</h1>
-            <br>
-            <button id="start">Let's Begin!</button>
-        </section>
-        <div id="question-number"></div>
-        <section id="quiz-page" class="page hidden">
-            <h2 id="question"></h2>
-            <div id="choices"></div>
-            <hr>
-            <div id="result">That's right!</div>
-        </section>
-        <section id="final-results" class="page hidden">
-            <h2>Final Score</h2>
-            <button id="back-to-start-button">Back to Start</button>
-        </section>
+
+    <main id="game-container">
+        <div class="container">
+            <section id="intro">
+                <h1>Bob's Burgers Trivia</h1>
+                <p>
+                    Think you know the Belchers pretty well? Let's put it to the test. You will start with 75 seconds on
+                    the timer; for every correct answer, you will get an extra 10 seconds. For evert incorrect answer,
+                    you will lost 10 seconds. If you can beat the timer, you just might earn the title of Honorary
+                    Belcher.
+                </p>
+                <button id="start-button">Let's Get Started!</button>
+            </section>
+            <section id="game">
+                <h2 id="current-question"></h2>
+                <div id="choices"></div>
+                <hr>
+                <div id="question-result"></div>
+            </section>
+        </div>
     </main>
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
     <script src="./assets/js/quiz.js"></script>
 </body>
 
