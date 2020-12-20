@@ -12,6 +12,7 @@ var wrongAnswers = 0;
 
 
 var questions = [   // array of objects containing quiz questions
+
     {
         question: "What is the order of the Belcher children from oldest to youngest?",
         choices: ["Tina, Louise, Gene", "Gene, Louise, Tina", "Tina, Gene, Louise", "Louise, Gene, Tina"],
@@ -49,7 +50,7 @@ var questions = [   // array of objects containing quiz questions
         choices: ["Joshua", "Jimmy Jr.", "Zeke", "Darryl"],
         correctIndex: 1
     }, {
-        question: "What did the Belchers kids and Regular Sized Rudy steal in the episode: The Kids Rob a Train?",
+        question: "What did the Belcher kids and Regular Sized Rudy steal in the episode: The Kids Rob a Train?",
         choices: ["Chocolate", "Wine", "Wallets", "Juice Boxes"],
         correctIndex: 0
     },
