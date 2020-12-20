@@ -1,17 +1,15 @@
 // select important elements & declare as variables
 // var introEl = document.querySelector("#intro");
-var initTimer = document.getElementById("#time");
-var startBtn = document.getElementById("#start-button");
-var currentQuestion = document.getElementById("#current-question");
-var choicesEl = document.getElementById("#choices");
-var userResult = document.getElementById("#question-result");
+let initTimer = document.getElementById("#time");
+let choicesEl = document.getElementById("#choices");
+let userResult = document.getElementById("#question-result");
 
 // global variables
-var correctAnswers = 0;
-var wrongAnswers = 0;
+let correctAnswers = 0;
+let wrongAnswers = 0;
 
 
-var questions = [   // array of objects containing quiz questions
+const questions = [   // array of objects containing quiz questions
 
     {
         question: "What is the order of the Belcher children from oldest to youngest?",
@@ -56,8 +54,14 @@ var questions = [   // array of objects containing quiz questions
     },
 ];
 
-// creates function when the startBtn is clicked by user
-startBtn.addEventListener("click", function hideIntro(event) {
-    event.preventDefault();
-    document.getElementById("intro").style.display = "none";
-})
+function getQuestion() {
+
+    // for loop goes through all the questions in the array
+    for (let i = 0; i < questions.length; i++) {
+        console.log(questions[i].question);
+
+        $("#current-question").append("<div>" + questions[i].question);
+    }
+}
+
+getQuestion();
