@@ -23,12 +23,12 @@
             <section id="intro">
                 <h1>Bob's Burgers Trivia</h1>
                 <p>
-                    Think you know the Belchers pretty well? Let's put it to the test. You will start with 75 seconds on
-                    the timer; for every correct answer, you will get an extra 10 seconds. For evert incorrect answer,
-                    you will lost 10 seconds. If you can beat the timer, you just might earn the title of Honorary
-                    Belcher.
+                    Alriiight! Think you're a big Bob's Burgers fan? Let's put that to the test. You will start with 75
+                    seconds on the timer. For every correct answer, you will gain 10 seconds on the timer and for every
+                    wrong answer, you will lose 10 seconds. The goal is to make it through all the questions before the
+                    timer runs out. Think you can handle it?
                 </p>
-                <a class="button is-info title is-4" href="./quiz.html"><strong>Let's Get Started!</strong></a>
+                <button onclick="toggleElement()" id="startBtn">Let's Go!</button>
             </section>
             <section id="game">
                 <h2 id="current-question">
@@ -45,7 +45,6 @@
             <p id="test"></p>
         </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/quizPage.js"></script>
 </body>
 

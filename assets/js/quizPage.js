@@ -1,12 +1,25 @@
 // select important elements & declare as variables
-// var introEl = document.querySelector("#intro");
-let initTimer = document.getElementById("#time");
-let choicesEl = document.getElementById("#choices");
-let userResult = document.getElementById("#question-result");
+let initTimer = document.getElementById("time");
+let choicesEl = document.getElementById("choices");
+let userResult = document.getElementById("question-result");
 
 // global variables
 let correctAnswers = 0;
 let wrongAnswers = 0;
+
+// toggles HTML elements when clicked
+function toggleElement() {
+
+    // selects "startBtn" element & declares as a variable
+    let startBtn = document.getElementById("startBtn");
+
+    // when startBtn is clicked, the style display will be set to 'none
+    if (startBtn.style.display === "none") {
+        startBtn.style.display = "block";
+    } else {
+        startBtn.style.display = "none";
+    }
+}
 
 const questions = [   // array of objects containing quiz questions
 
@@ -54,18 +67,18 @@ const questions = [   // array of objects containing quiz questions
 ];
 
 
-function getCurrentQuestion() {
+// function getCurrentQuestion() {
 
-    currentQuestion = " ";
+//     currentQuestion = " ";
 
-    for (let i = 0; i < questions.length; i++) {
-        // console.log(questions[i].question);
+//     for (let i = 0; i < questions.length; i++) {
+//         // console.log(questions[i].question);
 
-        currentQuestion.concat(questions[i].question);
-    }
+//         currentQuestion.concat(questions[i].question);
+//     }
 
-    return currentQuestion;
-}
+//     return currentQuestion;
+// }
 
 // $questions = $('.questions');
 
