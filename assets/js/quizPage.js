@@ -8,7 +8,6 @@ let userResult = document.getElementById("#question-result");
 let correctAnswers = 0;
 let wrongAnswers = 0;
 
-
 const questions = [   // array of objects containing quiz questions
 
     {
@@ -54,14 +53,34 @@ const questions = [   // array of objects containing quiz questions
     },
 ];
 
-function getQuestion() {
 
-    // for loop goes through all the questions in the array
+function getCurrentQuestion() {
+
+    currentQuestion = " ";
+
     for (let i = 0; i < questions.length; i++) {
-        console.log(questions[i].question);
+        // console.log(questions[i].question);
 
-        $("#current-question").append("<div>" + questions[i].question);
+        currentQuestion.concat(questions[i].question);
     }
+
+    return currentQuestion;
 }
 
-getQuestion();
+// $questions = $('.questions');
+
+// $questions.hide();
+
+// $($questions.get(currentQuestion)).fadeIn();
+
+// function getQuestion() {
+
+//     // for loop goes through all the questions in the array
+//     for (let i = 0; i < questions.length; i++) {
+//         console.log(questions[i].question);
+
+//         $("#current-question").append("<div>" + questions[i].question);
+//     }
+// }
+
+// getQuestion();
