@@ -13,12 +13,24 @@ function toggleElement() {
     // selects "startBtn" element & declares as a variable
     let startBtn = document.getElementById("startBtn");
 
-    // when startBtn is clicked, the style display will be set to 'none
+    // when startBtn is clicked, the style display will be set to 'none'
     if (startBtn.style.display === "none") {
         startBtn.style.display = "block";
     } else {
         startBtn.style.display = "none";
     }
+
+    // selects "intro" section & declares as a variable
+    let intro = document.getElementById("intro");
+
+    // when startBtn is clicked, intro section style display will be set to 'none'
+    if (intro.style.display === "none") {
+        intro.style.display = "block";
+    } else {
+        intro.style.display = "none";
+    }
+
+    displayQuestion();
 }
 
 const questions = [   // array of objects containing quiz questions
@@ -66,34 +78,17 @@ const questions = [   // array of objects containing quiz questions
     },
 ];
 
+// diisplays questions 1 by 1 in an <h1> tag
+function displayQuestion() {
 
-// function getCurrentQuestion() {
+    // starts the question counter at 0;
+    let currentQuestion = 0;
 
-//     currentQuestion = " ";
+    let displayText = document.createElement('h1');
 
-//     for (let i = 0; i < questions.length; i++) {
-//         // console.log(questions[i].question);
+    // appends the text to the HTML body
+    document.body.appendChild(displayText);
 
-//         currentQuestion.concat(questions[i].question);
-//     }
+    displayText.textContent = questions[currentQuestion].question;
+}
 
-//     return currentQuestion;
-// }
-
-// $questions = $('.questions');
-
-// $questions.hide();
-
-// $($questions.get(currentQuestion)).fadeIn();
-
-// function getQuestion() {
-
-//     // for loop goes through all the questions in the array
-//     for (let i = 0; i < questions.length; i++) {
-//         console.log(questions[i].question);
-
-//         $("#current-question").append("<div>" + questions[i].question);
-//     }
-// }
-
-// getQuestion();
