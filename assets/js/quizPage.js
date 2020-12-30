@@ -122,21 +122,24 @@ function displayQuestion() {
 
 function displayChoices() {
 
+    // create choices as radio inputs
     for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
+        let choice = document.createElement("input");
+        choice.type = "radio";
+        choice.className = "choices";
+        choice.value = i;
 
-        let listChoices = document.createElement('input');
-        listChoices.type = 'radio';
-        listChoices.value = questions[currentQuestion].choices[i];
-        document.body.appendChild(listChoices);
-
+        // append current choice to quiz
+        document.body.appendChild(choice);
+        document.body.appendChild(document.createTextNode(questions[currentQuestion].choices[i]));
+        document.body.appendChild(document.createElement('br'));
     }
 
-    if (currentQuestion < questions.length) {
-        currentQuestion++;
+    if (choice.value && choice.checked === questions[currentQuestion].correctIndex) {
+        alert("that's correct")
     } else {
-        alert('done!');
+        alert("wrong")
     }
-
 }
 
 // function nextQuestion() {
