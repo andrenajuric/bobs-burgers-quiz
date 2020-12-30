@@ -129,17 +129,21 @@ function displayChoices() {
         choice.className = "choices";
         choice.value = i;
 
+        // if user has chosen current choice as answer, mark current choice
+        if ('answer' in quiz.allQuestions[quiz.index] && choice.value == quiz.allQuestions[quiz.index]['answer']) {
+            choice.checked = "checked";
+        }
+
+        // if ((questions[currentQuestion].choice.value.checked = "checked") === questions[currentQuestion].correctIndex) {
+        //     console.log('correct');
+        // }
+
         // append current choice to quiz
         document.body.appendChild(choice);
         document.body.appendChild(document.createTextNode(questions[currentQuestion].choices[i]));
         document.body.appendChild(document.createElement('br'));
     }
 
-    if (choice.value && choice.checked === questions[currentQuestion].correctIndex) {
-        alert("that's correct")
-    } else {
-        alert("wrong")
-    }
 }
 
 // function nextQuestion() {
