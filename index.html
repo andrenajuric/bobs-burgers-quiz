@@ -12,7 +12,7 @@
 <body>
     <header>
         <a href="#">View Highscores</a>
-        <span id="time">Time: </span>
+        <div id="time">Time: </div>
         <div id="hero">
             <img src="./assets/images/the-belchers.png" width="200px" height="270px">
         </div>
@@ -28,7 +28,7 @@
                     wrong answer, you will lose 10 seconds. The goal is to make it through all the questions before the
                     timer runs out. Think you can handle it?
                 </p>
-                <button onclick="toggleElement()" id="startBtn">Let's Go!</button>
+                <button onclick="hideIntro()" id="startBtn">Let's Go!</button>
             </section>
             <section id="game">
                 <h2 id="current-question">
@@ -41,8 +41,9 @@
                 <div id="question-result">
 
                 </div>
+                <!-- <button onclick="toggleElement()" id="nextQues">Next Question!</button> -->
             </section>
-            <p id="test"></p>
+            <!-- <button id="submit">Submit Quiz</button> -->
         </div>
     </main>
     <script src="./assets/js/quizPage.js"></script>

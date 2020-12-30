@@ -2,13 +2,35 @@
 let initTimer = document.getElementById("time");
 let choicesEl = document.getElementById("choices");
 let userResult = document.getElementById("question-result");
+const submitButton = document.getElementById("submit");
+var timeEl = document.getElementById("time");
 
 // global variables
 let correctAnswers = 0;
 let wrongAnswers = 0;
+let secondsLeft = 75;
+
+function setTime() {
+
+    let callback = function () {
+
+        secondsLeft--;
+
+        timeEl.textContent = "Time: " + secondsLeft + " seconds left";
+
+        if (secondsLeft == 0) {
+            clearInterval(timerInterval);
+            alert("time is up!");
+        }
+
+    };
+
+    let timerInterval = setInterval(callback, 1000);
+
+}
 
 // toggles HTML elements when clicked
-function toggleElement() {
+function hideIntro() {
 
     // selects "startBtn" element & declares as a variable
     let startBtn = document.getElementById("startBtn");
@@ -30,6 +52,7 @@ function toggleElement() {
         intro.style.display = "none";
     }
 
+    setTime();
     displayQuestion();
 }
 
@@ -78,17 +101,69 @@ const questions = [   // array of objects containing quiz questions
     },
 ];
 
+// starts the question counter at 0;
+let currentQuestion = 0;
+
 // diisplays questions 1 by 1 in an <h1> tag
 function displayQuestion() {
 
-    // starts the question counter at 0;
-    let currentQuestion = 0;
-
-    let displayText = document.createElement('h1');
+    // creates the <h1> tag
+    let displayText = document.createElement("h1");
+    displayText.style.textAlign = "center";
 
     // appends the text to the HTML body
     document.body.appendChild(displayText);
 
+    // grabs the text content of the current question
     displayText.textContent = questions[currentQuestion].question;
+
+    displayChoices();
 }
 
+function displayChoices() {
+
+    for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
+
+        let listChoices = document.createElement('input');
+        listChoices.type = 'radio';
+        listChoices.value = questions[currentQuestion].choices[i];
+        document.body.appendChild(listChoices);
+
+    }
+
+    if (currentQuestion < questions.length) {
+        currentQuestion++;
+    } else {
+        alert('done!');
+    }
+
+}
+
+// function nextQuestion() {
+
+//     ++currentQuestion;
+//     document.write(questions[currentQuestion].question + "<br />");
+
+//     for (let j = 0; j < questions[currentQuestion].choices.length; j++) {
+//         document.write("<input type=radio id=myRadio name=radAnswer>" + questions[currentQuestion].choices[j] + "<br />");
+//     }
+
+//     if (currentQuestion < (questions.length - 1)) {
+//         let nextButton = document.write("<button onclick='toggleElement()' id='nextBtn'>");
+//         // let nextButton = document.createElement("input");
+//         // nextButton.type = "button";
+//         nextButton.value = "Next question";
+//         nextButton.addEventListener('click', nextQuestion);
+//         document.body.appendChild(nextButton);
+//     } else {
+//         let submitButton = document.createElement("input");
+//         submitButton.type = "button";
+//         submitButton.value = "Submit";
+//         submitButton.addEventListener("click", function submitQuiz() {
+//             console.log('your quiz has been submitted');
+//         });
+//         document.body.appendChild(submitButton);
+//     }
+// };
+
+// nextQuestion();
