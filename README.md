@@ -12,6 +12,8 @@ Timed quiz about Bob's Burgers
 
 * [Screenshot](#screenshot)
 
+* [Future Development](#future-development)
+
 * [Contact](#contact)
 
 ## Location
@@ -27,6 +29,10 @@ Instructions are provided at the beginning and upon pressing the 'play' button, 
 ## Screenshot
 
 ![screenshot](assets/images/screenshot.png)
+
+## Future Development
+
+In the future I would like to actually add the "highscores" page and I'd like to add effects for correct/wrong answer. 
 
 ## Contact
 
