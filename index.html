@@ -18,8 +18,7 @@
         </div>
     </header>
 
-    <main id="game-container">
-        <div class="container">
+    <main>
             <section id="intro" style="text-align: center;">
                 <h1>Bob's Burgers Trivia</h1>
                 <p>
@@ -28,7 +27,7 @@
                     wrong answer, you will lose 10 seconds. The goal is to make it through all the questions before the
                     timer runs out. Think you can handle it?
                 </p>
-                <button onclick="hideIntro()" id="startBtn">Let's Go!</button>
+                <button onclick="hideIntro()" id="startBtn">Let's Get Started!</button>
             </section>
             <section id="game" style="text-align: center;">
                 <h2 id="current-question">
@@ -42,7 +41,9 @@
                     <!-- choice result will display here -->
                 </div>
             </section>
-            <!-- <button id="submit">Submit Quiz</button> -->
+            <section id="final-score" style="text-align: center;">
+
+            </section>
         </div>
     </main>
     <script src="./assets/js/quizPage.js"></script>

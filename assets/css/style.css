@@ -1,5 +1,12 @@
-#startBtn {
-    display: block;
+button {
+  background-color: #d96459;
+  color: white;
+  padding: 8px;
+  border: 0;
+}
+
+main #intro h1, main #intro p {
+    text-align: center;
 }
 
 #time {

@@ -4,14 +4,15 @@ const heroEl = document.getElementById("hero");
 const gameSectionEl = document.getElementById("game");
 const intro = document.getElementById("intro");
 const startBtn = document.getElementById("startBtn");
-var currentQuestionEl = document.getElementById("current-question");
-var choicesEl = document.getElementById("choices-list");
-var choiceResult = document.getElementById("choice-result");
+const currentQuestionEl = document.getElementById("current-question");
+let choicesEl = document.getElementById("choices-list");
+let choiceResult = document.getElementById("choice-result");
+let scorePageEl = document.getElementById("final-score");
 
 // global variables
-let correctScore = 0;
-let wrongScore = 0;
+let score = 0;
 let secondsLeft = 75;
+const timePenalty = 10;
 
 // timer function
 function setTime() {
@@ -26,7 +27,7 @@ function setTime() {
         // once secondsLeft hits 0, page will alert that time is up
         if (secondsLeft == 0) {
             clearInterval(timerInterval);
-            alert("time is up!");
+            finalScore();
         }
 
     };
@@ -52,7 +53,6 @@ function hideIntro() {
         intro.style.display = "none";
     }
 
-    setTime();
     displayQuestion();
 }
 
@@ -98,20 +98,39 @@ const questions = [   // array of objects containing quiz questions
         question: "What did the Belcher kids and Regular Sized Rudy steal in the episode: The Kids Rob a Train?",
         choices: ["Chocolate", "Wine", "Wallets", "Juice Boxes"],
         correct: 0
+    }, {
+        question: "Who said 'First I smelt it and now I want you to dealt it... into my mouth'?",
+        choices: ["Hugo", "Gene", "Skip Marooch", "Mort"],
+        correct: 2
+    }, {
+        question: "What is Bob's favorite holiday?",
+        choices: ["Halloween", "Thanksgiving", "Christmas", "He hates holidays"],
+        correct: 1
+    }, {
+        question: "What street do the Belchers live on?",
+        choices: ["Ocean Street", "Wharf Avenue", "Wharf Drive", "Ocean Avenue"],
+        correct: 3
+    }, {
+        question: "What is Gene most afraid of?",
+        choices: ["Spiders", "Clowns", "Snakes", "Teengers"],
+        correct: 2
     },
 ];
 
+// the current question index of questions array
 let currentQuestion;
 
 function displayQuestion() {
 
     currentQuestion = 0;
-    correctScore = 0;
+    score = 0;
 
-    displayNextQuestion();
+    setTime();
+
+    nextQuestion();
 }
 
-function displayNextQuestion() {
+function nextQuestion() {
 
     if (currentQuestion < questions.length) {
 
@@ -137,25 +156,52 @@ function displayNextQuestion() {
 
     } else {
         clearInterval(timerInterval)
+        finalScore();
     }
 }
 
+// checks the user selection and returns results
 function checkAnswer() {
     choicesEl.addEventListener("click", function (event) {
         event.preventDefault();
 
+        // tracks which button is chosen
         if (event.target.matches("button")) {
             var button = event.target;
             if (button.classList.contains("correct")) {
-                choiceResult.textContent = "Alright!"
-                correctScore++;
+                choiceResult.textContent = "*linda voice* Alright!" // adds text to choiceResult <div>
+                score++; // adds point to # of correct answers
             } else {
                 choiceResult.textContent = "*tina groan*";
+                secondsLeft -= timePenalty; // subtracts 10 seconds from timer if incorrect 
             }
-            if (secondsLeft > 0) displayNextQuestion()
-            else console.log('this is where the results page will go')
+            if (secondsLeft > 0) nextQuestion() // if there is still time left, nextQuestion is called
+            else finalScore();
         }
     });
 }
 
+// calls the function
 checkAnswer();
+
+function finalScore() {
+
+    if (secondsLeft < 0) {
+        secondsLeft = 0;
+    }
+    timeEl.textContent = secondsLeft;
+
+    if (gameSectionEl.style.display === "none") {
+        gameSectionEl.style.display = "block";
+    } else {
+        gameSectionEl.style.display = "none";
+    }
+
+    let finish = document.createElement("h2");
+    finish.textContent = "Alright, Show's Over!";
+    scorePageEl.appendChild(finish);
+
+    let scoreTally = document.createElement("div");
+    scoreTally.textContent = "Your final score is " + score;
+    scorePageEl.appendChild(scoreTally);
+}
