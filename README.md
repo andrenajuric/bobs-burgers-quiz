@@ -26,7 +26,7 @@ Instructions are provided at the beginning and upon pressing the 'play' button, 
 
 ## Screenshot
 
-![screenshot](assets\images\screenshot.png)
+![screenshot](assets/images/screenshot.png)
 
 ## Contact
 
