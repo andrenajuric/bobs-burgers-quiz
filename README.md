@@ -26,6 +26,8 @@ Instructions are provided at the beginning and upon pressing the 'play' button, 
 
 ## Screenshot
 
+![screenshot](assets\images\screenshot.png)
+
 ## Contact
 
 You may contact me via email or GitHub if you have any questions.
