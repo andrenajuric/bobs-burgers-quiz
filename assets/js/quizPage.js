@@ -1,23 +1,28 @@
 // select important elements & declare as variables
-let initTimer = document.getElementById("time");
-let choicesEl = document.getElementById("choices");
-let userResult = document.getElementById("question-result");
-const submitButton = document.getElementById("submit");
-var timeEl = document.getElementById("time");
+let timeEl = document.getElementById("time");
+const heroEl = document.getElementById("hero");
+const gameSectionEl = document.getElementById("game");
+const intro = document.getElementById("intro");
+const startBtn = document.getElementById("startBtn");
+var currentQuestionEl = document.getElementById("current-question");
+var choicesEl = document.getElementById("choices-list");
 
 // global variables
-let correctAnswers = 0;
-let wrongAnswers = 0;
+let correctScore = 0;
+let wrongScore = 0;
 let secondsLeft = 75;
 
+// timer function
 function setTime() {
 
     let callback = function () {
 
+        // counts down from 75
         secondsLeft--;
 
-        timeEl.textContent = "Time: " + secondsLeft + " seconds left";
+        timeEl.textContent = "Time: " + secondsLeft + " seconds";
 
+        // once secondsLeft hits 0, page will alert that time is up
         if (secondsLeft == 0) {
             clearInterval(timerInterval);
             alert("time is up!");
@@ -32,18 +37,12 @@ function setTime() {
 // toggles HTML elements when clicked
 function hideIntro() {
 
-    // selects "startBtn" element & declares as a variable
-    let startBtn = document.getElementById("startBtn");
-
     // when startBtn is clicked, the style display will be set to 'none'
     if (startBtn.style.display === "none") {
         startBtn.style.display = "block";
     } else {
         startBtn.style.display = "none";
     }
-
-    // selects "intro" section & declares as a variable
-    let intro = document.getElementById("intro");
 
     // when startBtn is clicked, intro section style display will be set to 'none'
     if (intro.style.display === "none") {
@@ -61,116 +60,118 @@ const questions = [   // array of objects containing quiz questions
     {
         question: "What is the order of the Belcher children from oldest to youngest?",
         choices: ["Tina, Louise, Gene", "Gene, Louise, Tina", "Tina, Gene, Louise", "Louise, Gene, Tina"],
-        correctIndex: 2
+        correct: 2
     }, {
         question: "What are the names of the two regular customers at Bob's Burgers?",
         choices: ["Teddy and Mort", "Jimmy Pesto and Trev", "Gretchen and Marshmallow", "Calvin and Gayle"],
-        correctIndex: 0
+        correct: 0
     }, {
         question: "What was the name of Linda's high school band?",
         choices: ["Bad Hair Day", "Menstruation Nation", "Linda and the Lindette's", "The Ta-Ta's"],
-        correctIndex: 3
+        correct: 3
     }, {
         question: "When is Bob and Linda's anniversary?",
         choices: ["May 4th", "September 3rd", "August 9th", "December 6th"],
-        correctIndex: 1
+        correct: 1
     }, {
         question: "What is Gene Belcher's astrological sign?",
         choices: ["Sagittarius", "Taurus", "Cancer", "Libra"],
-        correctIndex: 0
+        correct: 0
     }, {
         question: "What is Tina's favorite animal?",
         choices: ["Dogs", "Sloths", "Horses", "Chinchillas"],
-        correctIndex: 2
+        correct: 2
     }, {
         question: "Which recurring character has a nickname of 'Slowhand'?",
         choices: ["Sergeant Bosco", "Regular Sized Rudy", "Jimmy Jr.", "Dr. Yap"],
-        correctIndex: 3
+        correct: 3
     }, {
         question: "What part(s) of the show intro change every time?",
         choices: ["The banner", "The van", "The store to the right", "The van and the store to the right"],
-        correctIndex: 3
+        correct: 3
     }, {
         question: "Who is Tina's on-again, off-again crush?",
         choices: ["Joshua", "Jimmy Jr.", "Zeke", "Darryl"],
-        correctIndex: 1
+        correct: 1
     }, {
         question: "What did the Belcher kids and Regular Sized Rudy steal in the episode: The Kids Rob a Train?",
         choices: ["Chocolate", "Wine", "Wallets", "Juice Boxes"],
-        correctIndex: 0
+        correct: 0
     },
 ];
 
-// starts the question counter at 0;
-let currentQuestion = 0;
+let currentQuestion;
 
-// diisplays questions 1 by 1 in an <h1> tag
+// diisplays questions 1 by 1 in an <h2> tag
 function displayQuestion() {
 
-    // creates the <h1> tag
-    let displayText = document.createElement("h1");
-    displayText.style.textAlign = "center";
-
-    // appends the text to the HTML body
-    document.body.appendChild(displayText);
-
     // grabs the text content of the current question
-    displayText.textContent = questions[currentQuestion].question;
+    // currentQuestionEl.textContent = questions[currentQuestion].question;
 
-    displayChoices();
+    currentQuestion = 0;
+    correctScore = 0;
+
+    displayNextQuestion();
 }
 
-function displayChoices() {
+function displayNextQuestion() {
 
-    // create choices as radio inputs
-    for (let i = 0; i < questions[currentQuestion].choices.length; i++) {
-        let choice = document.createElement("input");
-        choice.type = "radio";
-        choice.className = "choices";
-        choice.value = i;
+    if (currentQuestion < questions.length) {
 
-        // if user has chosen current choice as answer, mark current choice
-        if ('answer' in quiz.allQuestions[quiz.index] && choice.value == quiz.allQuestions[quiz.index]['answer']) {
-            choice.checked = "checked";
+        // get the question and answers from the 
+        const question = questions[currentQuestion].question;
+        const answers = questions[currentQuestion].choices;
+        const correctAnswer = answers[questions[currentQuestion].correct];
+
+        currentQuestionEl.textContent = question;
+        choicesEl.innerHTML = "";
+
+        for (let i = 0; i < answers.length; i++) {
+            let answer = answers[i];
+            let button = document.createElement("button");
+            button.classList.add("answer");
+            if (answer == correctAnswer)
+                button.classList.add("correct")
+            button.textContent = answer;
+            choicesEl.appendChild(button);
         }
 
-        // if ((questions[currentQuestion].choice.value.checked = "checked") === questions[currentQuestion].correctIndex) {
-        //     console.log('correct');
-        // }
+        currentQuestion++
 
-        // append current choice to quiz
-        document.body.appendChild(choice);
-        document.body.appendChild(document.createTextNode(questions[currentQuestion].choices[i]));
-        document.body.appendChild(document.createElement('br'));
+    } else {
+        clearInterval(timerInterval)
     }
-
 }
 
-// function nextQuestion() {
+//     if (currentQuestion < questions.length) {
 
-//     ++currentQuestion;
-//     document.write(questions[currentQuestion].question + "<br />");
+//         const options = questions[currentQuestion].choices;
+//         const correctAnswer = questions[currentQuestion].correct;
 
-//     for (let j = 0; j < questions[currentQuestion].choices.length; j++) {
-//         document.write("<input type=radio id=myRadio name=radAnswer>" + questions[currentQuestion].choices[j] + "<br />");
-//     }
+//         // create choices as radio inputs
+//         for (let i = 0; i < options.length; i++) {
+//             let choice = document.createElement("input");
+//             choice.type = "radio";
+//             choice.className = "choices";
+//             choice.name = "radAnswer";
+//             choice.value = i;
 
-//     if (currentQuestion < (questions.length - 1)) {
-//         let nextButton = document.write("<button onclick='toggleElement()' id='nextBtn'>");
-//         // let nextButton = document.createElement("input");
-//         // nextButton.type = "button";
-//         nextButton.value = "Next question";
-//         nextButton.addEventListener('click', nextQuestion);
-//         document.body.appendChild(nextButton);
+//             if (i === correctAnswer)
+//                 choice.classList.add('correct');
+
+//             // append list of choices to quiz
+//             gameSectionEl.appendChild(choice);
+//             gameSectionEl.appendChild(document.createTextNode(questions[currentQuestion].choices[i]));
+//             gameSectionEl.appendChild(document.createElement('br'));
+//         }
+
+//         currentQuestion++;
+
 //     } else {
-//         let submitButton = document.createElement("input");
-//         submitButton.type = "button";
-//         submitButton.value = "Submit";
-//         submitButton.addEventListener("click", function submitQuiz() {
-//             console.log('your quiz has been submitted');
-//         });
-//         document.body.appendChild(submitButton);
+//         clearInterval(timerInterval);
 //     }
-// };
+// }
 
-// nextQuestion();
+// function checkAnswer() {
+
+// }
