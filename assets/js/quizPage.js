@@ -175,8 +175,12 @@ function checkAnswer() {
                 choiceResult.textContent = "*tina groan*";
                 secondsLeft -= timePenalty; // subtracts 10 seconds from timer if incorrect 
             }
-            if (secondsLeft > 0) nextQuestion() // if there is still time left, nextQuestion is called
-            else finalScore();
+            if (secondsLeft > 0) {
+                nextQuestion()
+            } else {
+                secondsLeft = 0;
+                finalScore();
+            }
         }
     });
 }

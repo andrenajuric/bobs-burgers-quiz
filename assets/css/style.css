@@ -1,8 +1,28 @@
 button {
-  background-color: #d96459;
-  color: white;
-  padding: 8px;
+  background-color: #a7c5eb;  
+  color: black;
+  padding: 12px;
   border: 0;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 20px;
+}
+
+h1, h2 {
+  font-family: 'Patrick Hand', cursive;
+  color: #db1a1a;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+p {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 20px;
 }
 
 main #intro h1, main #intro p {
@@ -11,4 +31,13 @@ main #intro h1, main #intro p {
 
 #time {
     float: right;
+}
+
+main #game #choices-list {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+main #game #choices-list button {
+  margin: 0.1rem;
 }

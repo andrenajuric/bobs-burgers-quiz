@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bob's Burgers Trivia</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -19,31 +21,31 @@
     </header>
 
     <main>
-            <section id="intro" style="text-align: center;">
-                <h1>Bob's Burgers Trivia</h1>
-                <p>
-                    Alriiight! Think you're a big Bob's Burgers fan? Let's put that to the test. You will start with 75
-                    seconds on the timer. For every correct answer, you will gain 10 seconds on the timer and for every
-                    wrong answer, you will lose 10 seconds. The goal is to make it through all the questions before the
-                    timer runs out. Think you can handle it?
-                </p>
-                <button onclick="hideIntro()" id="startBtn">Let's Get Started!</button>
-            </section>
-            <section id="game" style="text-align: center;">
-                <h2 id="current-question">
-                    <!-- question will display here -->
-                </h2>
-                <div id="choices-list">
-                    <!-- list of choices will display here -->
-                </div>
-                <hr>
-                <div id="choice-result">
-                    <!-- choice result will display here -->
-                </div>
-            </section>
-            <section id="final-score" style="text-align: center;">
+        <section id="intro" style="text-align: center;">
+            <h1>Bob's Burgers Trivia</h1>
+            <p>
+                Alriiight! Think you're a big Bob's Burgers fan? Let's put that to the test. You will start with 75
+                seconds on the timer. For every wrong answer, you will lose 10 seconds in the timer. The goal is to make
+                it through all the questions before the
+                timer runs out. Think you can handle it?
+            </p>
+            <button onclick="hideIntro()" id="startBtn">Let's Get Started!</button>
+        </section>
+        <section id="game" style="text-align: center;">
+            <h2 id="current-question">
+                <!-- question will display here -->
+            </h2>
+            <div id="choices-list">
+                <!-- list of choices will display here -->
+            </div>
+            <hr>
+            <div id="choice-result">
+                <!-- choice result will display here -->
+            </div>
+        </section>
+        <section id="final-score" style="text-align: center;">
 
-            </section>
+        </section>
         </div>
     </main>
     <script src="./assets/js/quizPage.js"></script>
