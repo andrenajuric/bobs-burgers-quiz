@@ -6,6 +6,7 @@ const intro = document.getElementById("intro");
 const startBtn = document.getElementById("startBtn");
 var currentQuestionEl = document.getElementById("current-question");
 var choicesEl = document.getElementById("choices-list");
+var choiceResult = document.getElementById("choice-result");
 
 // global variables
 let correctScore = 0;
@@ -102,11 +103,7 @@ const questions = [   // array of objects containing quiz questions
 
 let currentQuestion;
 
-// diisplays questions 1 by 1 in an <h2> tag
 function displayQuestion() {
-
-    // grabs the text content of the current question
-    // currentQuestionEl.textContent = questions[currentQuestion].question;
 
     currentQuestion = 0;
     correctScore = 0;
@@ -143,35 +140,22 @@ function displayNextQuestion() {
     }
 }
 
-//     if (currentQuestion < questions.length) {
+function checkAnswer() {
+    choicesEl.addEventListener("click", function (event) {
+        event.preventDefault();
 
-//         const options = questions[currentQuestion].choices;
-//         const correctAnswer = questions[currentQuestion].correct;
+        if (event.target.matches("button")) {
+            var button = event.target;
+            if (button.classList.contains("correct")) {
+                choiceResult.textContent = "Alright!"
+                correctScore++;
+            } else {
+                choiceResult.textContent = "*tina groan*";
+            }
+            if (secondsLeft > 0) displayNextQuestion()
+            else console.log('this is where the results page will go')
+        }
+    });
+}
 
-//         // create choices as radio inputs
-//         for (let i = 0; i < options.length; i++) {
-//             let choice = document.createElement("input");
-//             choice.type = "radio";
-//             choice.className = "choices";
-//             choice.name = "radAnswer";
-//             choice.value = i;
-
-//             if (i === correctAnswer)
-//                 choice.classList.add('correct');
-
-//             // append list of choices to quiz
-//             gameSectionEl.appendChild(choice);
-//             gameSectionEl.appendChild(document.createTextNode(questions[currentQuestion].choices[i]));
-//             gameSectionEl.appendChild(document.createElement('br'));
-//         }
-
-//         currentQuestion++;
-
-//     } else {
-//         clearInterval(timerInterval);
-//     }
-// }
-
-// function checkAnswer() {
-
-// }
+checkAnswer();
